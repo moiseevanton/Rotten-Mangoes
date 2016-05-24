@@ -10,13 +10,15 @@
 @import MapKit;
 @import CoreLocation;
 
-@interface MapViewController () <CLLocationManagerDelegate,MKMapViewDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) BOOL shouldZoomToUserLocation;
 @property (strong, nonatomic) NSString *postalCode;
-@property (strong, nonatomic) NSArray *theatres;
+@property (strong, nonatomic) NSArray<Theatre *> *theatres;
+@property (assign, nonatomic) CLLocationCoordinate2D currentLocation;
 - (void)downloadTheatresWithString:(NSString *)string;
 
 @end
@@ -26,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.myTableView.dataSource = self;
+    self.myTableView.delegate = self;
     self.myMapView.delegate = self;
     self.shouldZoomToUserLocation = YES;
     
@@ -64,6 +68,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *location = [locations lastObject];
     CLLocationCoordinate2D userCoordinate = location.coordinate;
+    self.currentLocation = userCoordinate;
     NSLog(@"lat: %f lng: %f", userCoordinate.latitude, userCoordinate.longitude);
     
     if (self.shouldZoomToUserLocation) {
@@ -115,6 +120,9 @@
                 self.theatres = theatresArray;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.myMapView addAnnotations:self.theatres];
+                    [self calculateDistanceForTheatres];
+                    [self sortTheatresBasedOnDistance];
+                    [self.myTableView reloadData];
                 });
 
             }
@@ -140,5 +148,61 @@
 //    }
 //    return theatrePin;
 //}
+
+- (void)calculateDistanceForTheatres {
+    NSMutableArray *listOfDistances = [NSMutableArray new];
+    for (Theatre *theatre in self.theatres) {
+        MKMapPoint yourLocation = MKMapPointForCoordinate(self.currentLocation);
+        MKMapPoint destinationLocation = MKMapPointForCoordinate(theatre.coordinate);
+        CLLocationDistance distance = MKMetersBetweenMapPoints(yourLocation, destinationLocation);
+        if ([listOfDistances containsObject:@(distance)]) {
+            theatre.distance = 0;
+        } else {
+            theatre.distance = distance;
+            [listOfDistances addObject:@(distance)];
+        }
+    }
+}
+
+- (void)sortTheatresBasedOnDistance {
+    
+    NSArray *sortedTheatres = [self.theatres sortedArrayUsingComparator:^NSComparisonResult(Theatre *theatre1, Theatre *theatre2) {
+        NSNumber *t1 = [NSNumber numberWithDouble:theatre1.distance];
+        NSNumber *t2 = [NSNumber numberWithDouble:theatre2.distance];
+        return [t1 compare:t2];
+    }];
+    
+    NSMutableArray *newSortedTheatres = [sortedTheatres mutableCopy];
+    
+    for (Theatre *theatre in sortedTheatres) {
+        if (theatre.distance == 0) {
+            [newSortedTheatres removeObject:theatre];
+        }
+    }
+    
+    self.theatres = newSortedTheatres;
+}
+//    NSMutableArray *newSortedTheatres = [sortedTheatres mutableCopy];
+//    for (Theatre *theatre in sortedTheatres) {
+//        for (Theatre *anotherTheatre in newSortedTheatres) {
+//            if (theatre.distance == anotherTheatre.distance) {
+//                [newSortedTheatres removeObject:theatre];
+//            }
+//        }
+//    }
+//    self.theatres = sortedTheatres;
+//}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.theatres.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    Theatre *theTheatre = self.theatres[indexPath.row];
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@: %.0f meters away", theTheatre.title, theTheatre.distance];
+    return cell;
+}
 
 @end

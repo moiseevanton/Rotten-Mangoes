@@ -15,5 +15,6 @@
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *subtitle;
 @property (strong, nonatomic) NSString *address;
+@property (assign, nonatomic) CLLocationDistance distance;
 
 @end

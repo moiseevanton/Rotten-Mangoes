@@ -16,6 +16,9 @@
 		E9F04FA11CF35FCC00AC065B /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F04FA01CF35FCC00AC065B /* Movie.m */; };
 		E9F04FA41CF36BD500AC065B /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F04FA31CF36BD500AC065B /* CustomCell.m */; };
 		E9F04FA71CF37F5100AC065B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F04FA61CF37F5100AC065B /* DetailViewController.m */; };
+		E9F04FF41CF4B1E200AC065B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F04FF31CF4B1E200AC065B /* MapViewController.m */; };
+		E9F04FF61CF4B1F800AC065B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F04FF51CF4B1F800AC065B /* MapKit.framework */; };
+		E9F04FFB1CF4D61900AC065B /* Theatre.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F04FFA1CF4D61900AC065B /* Theatre.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,12 @@
 		E9F04FA31CF36BD500AC065B /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		E9F04FA51CF37F5100AC065B /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		E9F04FA61CF37F5100AC065B /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		E9F04FF21CF4B1E200AC065B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		E9F04FF31CF4B1E200AC065B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		E9F04FF51CF4B1F800AC065B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E9F04FF81CF4C6BC00AC065B /* Toronto.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Toronto.gpx; sourceTree = "<group>"; };
+		E9F04FF91CF4D61900AC065B /* Theatre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theatre.h; sourceTree = "<group>"; };
+		E9F04FFA1CF4D61900AC065B /* Theatre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theatre.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F04FF61CF4B1F800AC065B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +61,7 @@
 		E9F04F7C1CF3554300AC065B = {
 			isa = PBXGroup;
 			children = (
+				E9F04FF51CF4B1F800AC065B /* MapKit.framework */,
 				E9F04F871CF3554300AC065B /* Rotten Mangoes */,
 				E9F04F861CF3554300AC065B /* Products */,
 			);
@@ -82,6 +93,11 @@
 				E9F04FA31CF36BD500AC065B /* CustomCell.m */,
 				E9F04FA51CF37F5100AC065B /* DetailViewController.h */,
 				E9F04FA61CF37F5100AC065B /* DetailViewController.m */,
+				E9F04FF21CF4B1E200AC065B /* MapViewController.h */,
+				E9F04FF31CF4B1E200AC065B /* MapViewController.m */,
+				E9F04FF81CF4C6BC00AC065B /* Toronto.gpx */,
+				E9F04FF91CF4D61900AC065B /* Theatre.h */,
+				E9F04FFA1CF4D61900AC065B /* Theatre.m */,
 			);
 			path = "Rotten Mangoes";
 			sourceTree = "<group>";
@@ -165,11 +181,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9F04F901CF3554300AC065B /* ViewController.m in Sources */,
+				E9F04FFB1CF4D61900AC065B /* Theatre.m in Sources */,
 				E9F04F8D1CF3554300AC065B /* AppDelegate.m in Sources */,
 				E9F04FA11CF35FCC00AC065B /* Movie.m in Sources */,
 				E9F04F8A1CF3554300AC065B /* main.m in Sources */,
 				E9F04FA41CF36BD500AC065B /* CustomCell.m in Sources */,
 				E9F04FA71CF37F5100AC065B /* DetailViewController.m in Sources */,
+				E9F04FF41CF4B1E200AC065B /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +300,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Rotten Mangoes/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.moiseevanton.Rotten-Mangoes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -293,6 +312,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Rotten Mangoes/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.moiseevanton.Rotten-Mangoes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -318,6 +338,7 @@
 				E9F04F9E1CF3554300AC065B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *runtimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reviewsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *showTheatreMapButton;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "MapViewController.h"
 
 @interface DetailViewController ()
 
@@ -31,7 +32,7 @@
     NSURLSession *sharedSession = [NSURLSession sharedSession];
     NSURLSessionDataTask *apiTask = [sharedSession dataTaskWithRequest:apiRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        NSLog(@"%@", data);
+//        NSLog(@"%@", data);
         
         if (!error) {
             NSError *jsonError;
@@ -92,6 +93,14 @@
         self.reviewsLabel.text = reviewsString;
     }
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showMap"]) {
+        MapViewController *mpvc = segue.destinationViewController;
+        mpvc.theMovie = self.movie;
+    }
 }
 
 @end

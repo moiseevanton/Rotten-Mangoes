@@ -164,20 +164,30 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doN-pR-bma">
+                                        <rect key="frame" x="123" y="90" width="129" height="30"/>
+                                        <state key="normal" title="Show Theatre Map"/>
+                                        <connections>
+                                            <segue destination="CFK-dy-MHE" kind="show" identifier="showMap" id="ebn-Mo-FTX"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="svC-5A-45B" firstAttribute="centerX" secondItem="xCb-CN-Y2q" secondAttribute="centerX" id="FuE-16-aQ9"/>
                                     <constraint firstItem="pt5-CJ-dYi" firstAttribute="top" secondItem="bNF-af-gGG" secondAttribute="bottom" constant="30" id="J4T-vh-Fhg"/>
-                                    <constraint firstAttribute="bottom" secondItem="pt5-CJ-dYi" secondAttribute="bottom" constant="25" id="Rkh-p6-9dZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="doN-pR-bma" secondAttribute="bottom" constant="25" id="TEq-LG-ILk"/>
                                     <constraint firstItem="svC-5A-45B" firstAttribute="trailing" secondItem="xCb-CN-Y2q" secondAttribute="trailingMargin" id="UD4-PC-IS4"/>
                                     <constraint firstItem="pt5-CJ-dYi" firstAttribute="centerX" secondItem="xCb-CN-Y2q" secondAttribute="centerX" id="bvW-uG-jnB"/>
                                     <constraint firstAttribute="bottom" secondItem="bNF-af-gGG" secondAttribute="bottom" constant="444" id="g7y-Ri-OTy"/>
                                     <constraint firstItem="bNF-af-gGG" firstAttribute="centerX" secondItem="xCb-CN-Y2q" secondAttribute="centerX" id="l02-58-PZz"/>
                                     <constraint firstItem="P1Y-Nj-AGS" firstAttribute="centerX" secondItem="xCb-CN-Y2q" secondAttribute="centerX" id="qGf-c4-yId"/>
+                                    <constraint firstItem="doN-pR-bma" firstAttribute="centerX" secondItem="xCb-CN-Y2q" secondAttribute="centerX" id="que-cT-vsd"/>
                                     <constraint firstItem="pt5-CJ-dYi" firstAttribute="top" secondItem="bNF-af-gGG" secondAttribute="bottom" constant="30" id="rFG-nj-kHS"/>
                                     <constraint firstItem="svC-5A-45B" firstAttribute="top" secondItem="P1Y-Nj-AGS" secondAttribute="bottom" constant="18" id="rTy-Eo-PgT"/>
+                                    <constraint firstItem="doN-pR-bma" firstAttribute="top" secondItem="pt5-CJ-dYi" secondAttribute="bottom" constant="10" id="wKy-cs-Vgf"/>
                                     <constraint firstItem="hmL-4g-dvs" firstAttribute="top" secondItem="xCb-CN-Y2q" secondAttribute="top" id="y4b-9N-8lt"/>
                                     <constraint firstItem="P1Y-Nj-AGS" firstAttribute="top" secondItem="hmL-4g-dvs" secondAttribute="bottom" constant="15" id="y5t-Qc-FGF"/>
+                                    <constraint firstItem="doN-pR-bma" firstAttribute="top" secondItem="pt5-CJ-dYi" secondAttribute="bottom" constant="10" id="yG3-9n-N6G"/>
                                     <constraint firstItem="bNF-af-gGG" firstAttribute="top" secondItem="svC-5A-45B" secondAttribute="bottom" constant="17" id="yu5-1D-5KC"/>
                                     <constraint firstItem="hmL-4g-dvs" firstAttribute="centerX" secondItem="xCb-CN-Y2q" secondAttribute="centerX" id="zPf-Pw-x3D"/>
                                 </constraints>
@@ -201,6 +211,7 @@
                     <connections>
                         <outlet property="reviewsLabel" destination="pt5-CJ-dYi" id="GwZ-ew-uXO"/>
                         <outlet property="runtimeLabel" destination="svC-5A-45B" id="SQA-6f-Pfc"/>
+                        <outlet property="showTheatreMapButton" destination="doN-pR-bma" id="CIr-HF-0wQ"/>
                         <outlet property="synopsisLabel" destination="bNF-af-gGG" id="zaL-ro-q70"/>
                         <outlet property="titleLabel" destination="hmL-4g-dvs" id="pAq-tJ-ur3"/>
                         <outlet property="yearLabel" destination="P1Y-Nj-AGS" id="zKB-FE-A86"/>
@@ -209,6 +220,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhQ-Bk-e2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="659.5" y="204.5"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="F4Z-cv-d6Y">
+            <objects>
+                <viewController id="CFK-dy-MHE" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2vG-bK-7bp"/>
+                        <viewControllerLayoutGuide type="bottom" id="dMR-fp-9LT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dEo-vq-bPE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6va-dc-3XA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6va-dc-3XA" firstAttribute="top" secondItem="2vG-bK-7bp" secondAttribute="bottom" id="Dtk-ex-3tE"/>
+                            <constraint firstItem="dMR-fp-9LT" firstAttribute="top" secondItem="6va-dc-3XA" secondAttribute="bottom" id="EoV-Gk-KXX"/>
+                            <constraint firstItem="6va-dc-3XA" firstAttribute="leading" secondItem="dEo-vq-bPE" secondAttribute="leading" id="QXE-W8-ZxB"/>
+                            <constraint firstAttribute="trailing" secondItem="6va-dc-3XA" secondAttribute="trailing" id="SdA-UG-qxZ"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="myMapView" destination="6va-dc-3XA" id="xFk-zs-By5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M8j-FZ-UIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1173.5" y="204.5"/>
         </scene>
     </scenes>
 </document>
